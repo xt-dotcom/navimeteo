@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Navimeteo</title>
+  <title>Bankinsurance</title>
 
   <style>
     :root{
@@ -26,7 +26,7 @@
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
-      background: url("navimeteo.jpeg") no-repeat center center fixed;
+      background: url("banques.jpg") no-repeat center center fixed;
       background-size: cover;
     }
 
@@ -87,6 +87,7 @@
                   background .30s ease,
                   box-shadow .30s ease;
       box-shadow: 0 20px 50px rgba(0,0,0,.15);
+      -webkit-tap-highlight-color: transparent;
     }
 
     a.tile:hover{
@@ -128,12 +129,6 @@
       transform: translateZ(0);
     }
 
-    /* Pour le .jpg du port (souvent moins "net"), on le rend un poil plus grand */
-    .icon img.port{
-      width: 50px;
-      height: 50px;
-    }
-
     a.tile:hover .icon img{
       transform: scale(1.06);
       transition: transform .30s cubic-bezier(.2,.8,.2,1);
@@ -166,67 +161,67 @@
 
 <body>
   <div class="wrap">
-    <h1>Navimeteo</h1>
-    <div class="subtitle">Météo • Windy • Marées • Port • Cartes</div>
+    <h1>Bankinsurance</h1>
+    <div class="subtitle">Banques • Assurances • Accès client</div>
 
     <div class="grid">
 
-      <a class="tile" href="https://marine.meteoconsult.fr/meteo-marine/bulletin-detaille/port-311/previsions-meteo-saint-quay-port-d-armor-aujourdhui" target="_blank" rel="noopener">
+      <a class="tile" href="https://mabanque.bnpparibas/fr/gerer/comptes-et-formules/gerer-ses-comptes" target="_blank" rel="noopener">
         <div class="row">
           <div class="icon">
-            <img src="meteo.png" alt="Météo">
+            <img src="bnpparibas.png" alt="BNP Paribas">
           </div>
           <div>
-            <p class="name">Météo</p>
-            <p class="desc">Bulletin détaillé</p>
+            <p class="name">BNP</p>
+            <p class="desc">Ma banque</p>
           </div>
         </div>
       </a>
 
-      <a class="tile" href="https://www.windy.com/fr/-Mes-favoris/favs?48.647,-2.823,5" target="_blank" rel="noopener">
+      <a class="tile" href="https://www.banquepopulaire.fr/professionnels/" target="_blank" rel="noopener">
         <div class="row">
           <div class="icon">
-            <img src="windy.png" alt="Windy">
+            <img src="banquepopulaire.png" alt="Banque Populaire">
           </div>
           <div>
-            <p class="name">Windy</p>
-            <p class="desc">Vent & prévisions</p>
+            <p class="name">Banque Populaire</p>
+            <p class="desc">Espace pro</p>
           </div>
         </div>
       </a>
 
-      <a class="tile" href="https://maree.info/59" target="_blank" rel="noopener">
+      <a class="tile" href="https://fortuneo.fr" target="_blank" rel="noopener">
         <div class="row">
           <div class="icon">
-            <img src="marees.png" alt="Marées">
+            <img src="fortuneo.png" alt="Fortuneo">
           </div>
           <div>
-            <p class="name">Marées</p>
-            <p class="desc">Horaires & coef</p>
+            <p class="name">Fortuneo</p>
+            <p class="desc">Banque en ligne</p>
           </div>
         </div>
       </a>
 
-      <a class="tile" href="https://www.port-armor.com/" target="_blank" rel="noopener">
+      <a class="tile" href="https://www.matmut.fr/app/login/login?returnurl=https%3A%2F%2Fwww.matmut.fr%2Fapp%2FEspaceSocietaireInternet%2F%23%2Faccueil" target="_blank" rel="noopener">
         <div class="row">
           <div class="icon">
-            <img class="port" src="port.jpg" alt="Port d’Armor">
+            <img src="matmut.png" alt="Matmut">
           </div>
           <div>
-            <p class="name">Port d’Armor</p>
-            <p class="desc">Infos & services</p>
+            <p class="name">Matmut</p>
+            <p class="desc">Espace client</p>
           </div>
         </div>
       </a>
 
-      <a class="tile" href="https://maps.garmin.com/fr-FR/marine?maps=another-brand&overlay=false&key=gbtuzq7bxfzf" target="_blank" rel="noopener">
+      <a class="tile" href="https://espace-client.allianz.fr/" target="_blank" rel="noopener">
         <div class="row">
           <div class="icon">
-            <img src="cartes.png" alt="Cartes">
+            <img src="allianz.png" alt="Allianz">
           </div>
           <div>
-            <p class="name">Cartes</p>
-            <p class="desc">Garmin Marine</p>
+            <p class="name">Allianz</p>
+            <p class="desc">Espace client</p>
           </div>
         </div>
       </a>
