@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bankinsurance</title>
+  <title>Navimeteo</title>
 
   <style>
     :root{
@@ -26,10 +26,11 @@
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
-      background: url("banques.jpg") no-repeat center center fixed;
+      background: url("navimeteo.jpeg") no-repeat center center fixed;
       background-size: cover;
     }
 
+    /* overlay très léger */
     body::before{
       content:"";
       position: fixed;
@@ -74,6 +75,7 @@
       padding:28px 22px;
       border-radius: var(--radius);
 
+      /* Effet glass premium */
       background: var(--glass);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
@@ -97,16 +99,10 @@
       display:flex;
       align-items:center;
       gap:18px;
-      width: 100%;      /* 🔥 important */
-      min-width: 0;     /* 🔥 important */
+      min-width: 0;
     }
 
-    /* 🔥 le bloc texte doit pouvoir rétrécir en flex */
-    .row > div:last-child{
-      flex: 1 1 auto;   /* 🔥 important */
-      min-width: 0;     /* 🔥 important */
-    }
-
+    /* Cadre de l'icône */
     .icon{
       width:72px;
       height:72px;
@@ -122,6 +118,7 @@
       overflow:hidden;
     }
 
+    /* Image (PNG/JPG) */
     .icon img{
       width: 46px;
       height: 46px;
@@ -131,14 +128,18 @@
       transform: translateZ(0);
     }
 
+    /* Pour le .jpg du port (souvent moins "net"), on le rend un poil plus grand */
+    .icon img.port{
+      width: 50px;
+      height: 50px;
+    }
+
     a.tile:hover .icon img{
       transform: scale(1.06);
       transition: transform .30s cubic-bezier(.2,.8,.2,1);
     }
 
     .name{
-      display:block;
-      max-width:100%;
       font-size:17px;
       font-weight:800;
       margin:0;
@@ -149,16 +150,11 @@
     }
 
     .desc{
-      display:block;
-      max-width:100%;
       margin:0;
       font-size:13px;
       font-weight:600;
       color: rgba(11,31,58,.75);
       line-height: 1.25;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     @media (max-width: 600px){
@@ -170,67 +166,67 @@
 
 <body>
   <div class="wrap">
-    <h1>Bankinsurance</h1>
-    <div class="subtitle">Banques • Assurances • Accès client</div>
+    <h1>Navimeteo</h1>
+    <div class="subtitle">Météo • Windy • Marées • Port • Cartes</div>
 
     <div class="grid">
 
-      <a class="tile" href="https://mabanque.bnpparibas/fr/gerer/comptes-et-formules/gerer-ses-comptes" target="_blank" rel="noopener">
+      <a class="tile" href="https://marine.meteoconsult.fr/meteo-marine/bulletin-detaille/port-311/previsions-meteo-saint-quay-port-d-armor-aujourdhui" target="_blank" rel="noopener">
         <div class="row">
           <div class="icon">
-            <img src="bnpparibas.png" alt="BNP Paribas">
+            <img src="meteo.png" alt="Météo">
           </div>
           <div>
-            <p class="name">BNP</p>
-            <p class="desc">Ma banque</p>
+            <p class="name">Météo</p>
+            <p class="desc">Bulletin détaillé</p>
           </div>
         </div>
       </a>
 
-      <a class="tile" href="https://www.banquepopulaire.fr/professionnels/" target="_blank" rel="noopener">
+      <a class="tile" href="https://www.windy.com/fr/-Mes-favoris/favs?48.647,-2.823,5" target="_blank" rel="noopener">
         <div class="row">
           <div class="icon">
-            <img src="banquepopulaire.png" alt="Banque Populaire">
+            <img src="windy.png" alt="Windy">
           </div>
           <div>
-            <p class="name">Banque Populaire</p>
-            <p class="desc">Espace pro</p>
+            <p class="name">Windy</p>
+            <p class="desc">Vent & prévisions</p>
           </div>
         </div>
       </a>
 
-      <a class="tile" href="https://fortuneo.fr" target="_blank" rel="noopener">
+      <a class="tile" href="https://maree.info/59" target="_blank" rel="noopener">
         <div class="row">
           <div class="icon">
-            <img src="fortuneo.png" alt="Fortuneo">
+            <img src="marees.png" alt="Marées">
           </div>
           <div>
-            <p class="name">Fortuneo</p>
-            <p class="desc">Banque en ligne</p>
+            <p class="name">Marées</p>
+            <p class="desc">Horaires & coef</p>
           </div>
         </div>
       </a>
 
-      <a class="tile" href="https://www.matmut.fr/app/login/login?returnurl=https%3A%2F%2Fwww.matmut.fr%2Fapp%2FEspaceSocietaireInternet%2F%23%2Faccueil" target="_blank" rel="noopener">
+      <a class="tile" href="https://www.port-armor.com/" target="_blank" rel="noopener">
         <div class="row">
           <div class="icon">
-            <img src="matmut.png" alt="Matmut">
+            <img class="port" src="port.jpg" alt="Port d’Armor">
           </div>
           <div>
-            <p class="name">Matmut</p>
-            <p class="desc">Espace client</p>
+            <p class="name">Port d’Armor</p>
+            <p class="desc">Infos & services</p>
           </div>
         </div>
       </a>
 
-      <a class="tile" href="https://espace-client.allianz.fr/" target="_blank" rel="noopener">
+      <a class="tile" href="https://maps.garmin.com/fr-FR/marine?maps=another-brand&overlay=false&key=gbtuzq7bxfzf" target="_blank" rel="noopener">
         <div class="row">
           <div class="icon">
-            <img src="allianz.png" alt="Allianz">
+            <img src="cartes.png" alt="Cartes">
           </div>
           <div>
-            <p class="name">Allianz</p>
-            <p class="desc">Espace client</p>
+            <p class="name">Cartes</p>
+            <p class="desc">Garmin Marine</p>
           </div>
         </div>
       </a>
