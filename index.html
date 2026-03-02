@@ -5,20 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Navimeteo</title>
   <meta name="theme-color" content="#0b1220" />
+
   <style>
     :root{
-      --glass: rgba(255,255,255,.10);
-      --border: rgba(255,255,255,.18);
-      --text: #eef3ff;
-      --muted: rgba(238,243,255,.78);
-      --shadow: 0 20px 60px rgba(0,0,0,.35);
-      --shadow2: 0 10px 28px rgba(0,0,0,.28);
-      --radius: 22px;
-      --tile: 160px;
-      --gap: 16px;
+      --glass: rgba(255,255,255,.18);
+      --border: rgba(255,255,255,.28);
+      --text: #ffffff;
+      --muted: rgba(255,255,255,.85);
+      --shadow: 0 25px 60px rgba(0,0,0,.25);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,.18);
+      --radius: 26px;
+      --tile: 180px;
+      --gap: 18px;
     }
+
     *{ box-sizing:border-box; }
     html, body{ height:100%; }
+
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -27,33 +30,52 @@
       background-size: cover;
       overflow-x:hidden;
     }
+
+    /* Overlay premium lumineux */
     body::before{
       content:"";
-      position: fixed; inset:0;
-      background:
-        radial-gradient(1200px 700px at 10% 10%, rgba(0,0,0,.15), rgba(0,0,0,.55)),
-        radial-gradient(900px 500px at 90% 20%, rgba(0,0,0,.10), rgba(0,0,0,.50)),
-        rgba(0,0,0,.25);
+      position: fixed;
+      inset:0;
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      background: linear-gradient(
+        rgba(255,255,255,.06),
+        rgba(0,0,0,.15)
+      );
       z-index:-1;
     }
 
-    .wrap{ max-width: 1020px; margin:0 auto; padding:22px; }
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px;
+    }
 
     .header{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:14px; margin-bottom:16px;
+      margin-bottom: 22px;
     }
-    h1{ margin:0; font-size:20px; font-weight:750; letter-spacing:.2px; }
-    .subtitle{ margin:6px 0 0; font-size:13px; color:var(--muted); }
+
+    h1{
+      margin:0;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: .3px;
+    }
+
+    .subtitle{
+      margin-top: 6px;
+      font-size: 14px;
+      color: var(--muted);
+    }
 
     .panel{
       border-radius: var(--radius);
       background: var(--glass);
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      padding: 18px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding: 24px;
     }
 
     .grid{
@@ -64,92 +86,151 @@
 
     a.tile{
       position:relative;
-      display:flex; flex-direction:column; justify-content:center;
-      gap:12px;
-      padding:18px 14px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:14px;
+      padding:22px 18px;
       border-radius:22px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.14);
-      color:inherit;
+      background: rgba(255,255,255,.20);
+      border: 1px solid rgba(255,255,255,.35);
       text-decoration:none;
-      box-shadow: 0 10px 26px rgba(0,0,0,.25);
-      transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      color:inherit;
+      box-shadow: var(--shadow-soft);
+      transition: all .25s cubic-bezier(.2,.8,.2,1);
       overflow:hidden;
-      user-select:none;
     }
+
     a.tile::before{
       content:"";
       position:absolute;
-      inset:-1px;
-      background: radial-gradient(420px 240px at var(--mx, 50%) var(--my, 50%),
-        rgba(255,255,255,.22),
-        rgba(255,255,255,0) 58%);
+      inset:-2px;
+      background: radial-gradient(
+        400px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(255,255,255,.45),
+        transparent 60%
+      );
       opacity:0;
-      transition: opacity .18s ease;
+      transition: opacity .25s ease;
       pointer-events:none;
     }
+
     a.tile:hover{
-      transform: translateY(-3px) scale(1.01);
-      background: rgba(255,255,255,.12);
-      border-color: rgba(255,255,255,.22);
-      box-shadow: 0 18px 44px rgba(0,0,0,.32);
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 30px 60px rgba(0,0,0,.30);
+      background: rgba(255,255,255,.28);
     }
-    a.tile:hover::before{ opacity:1; }
 
-    .row{ display:flex; align-items:center; gap:12px; }
+    a.tile:hover::before{
+      opacity:1;
+    }
+
+    .row{
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+
     .icon{
-      width:56px; height:56px;
-      border-radius:18px;
-      display:grid; place-items:center;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.16);
-      flex:0 0 auto;
-      font-size:26px;
+      width:64px;
+      height:64px;
+      border-radius:20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:30px;
+      background: rgba(255,255,255,.35);
+      box-shadow: inset 0 0 15px rgba(255,255,255,.25);
     }
-    .name{ margin:0; font-size:14px; font-weight:750; letter-spacing:.2px; }
-    .desc{ margin:0; font-size:12px; color:var(--muted); line-height:1.25; }
 
-    .footer{ margin-top:12px; font-size:12px; color: rgba(238,243,255,.70); }
+    .name{
+      font-size:16px;
+      font-weight:700;
+      margin:0;
+    }
 
-    @media (max-width: 520px){
-      :root{ --tile: 150px; }
-      .panel{ padding: 14px; }
+    .desc{
+      margin:0;
+      font-size:13px;
+      color: rgba(255,255,255,.85);
+    }
+
+    .footer{
+      margin-top:16px;
+      font-size:12px;
+      color: rgba(255,255,255,.75);
+    }
+
+    @media (max-width: 600px){
+      :root{ --tile: 160px; }
+      .panel{ padding:18px; }
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="header">
-      <div>
-        <h1>Navimeteo</h1>
-        <p class="subtitle">Météo • Windy • Marées • Port • Cartes</p>
-      </div>
+      <h1>Navimeteo</h1>
+      <div class="subtitle">Météo • Windy • Marées • Port • Cartes</div>
     </div>
 
     <div class="panel">
       <div class="grid">
-        <a class="tile" href="https://marine.meteoconsult.fr/meteo-marine/bulletin-detaille/port-311/previsions-meteo-saint-quay-port-d-armor-aujourdhui" target="_blank" rel="noopener">
-          <div class="row"><div class="icon">☁️</div><div><p class="name">Météo</p><p class="desc">Bulletin détaillé</p></div></div>
+
+        <a class="tile" href="https://marine.meteoconsult.fr/meteo-marine/bulletin-detaille/port-311/previsions-meteo-saint-quay-port-d-armor-aujourdhui" target="_blank">
+          <div class="row">
+            <div class="icon">☁️</div>
+            <div>
+              <p class="name">Météo</p>
+              <p class="desc">Bulletin détaillé</p>
+            </div>
+          </div>
         </a>
 
-        <a class="tile" href="https://www.windy.com/fr/-Mes-favoris/favs?48.647,-2.823,5" target="_blank" rel="noopener">
-          <div class="row"><div class="icon">🌬️</div><div><p class="name">Windy</p><p class="desc">Vent & prévisions</p></div></div>
+        <a class="tile" href="https://www.windy.com/fr/-Mes-favoris/favs?48.647,-2.823,5" target="_blank">
+          <div class="row">
+            <div class="icon">🌬️</div>
+            <div>
+              <p class="name">Windy</p>
+              <p class="desc">Vent & prévisions</p>
+            </div>
+          </div>
         </a>
 
-        <a class="tile" href="https://maree.info/59" target="_blank" rel="noopener">
-          <div class="row"><div class="icon">🌊</div><div><p class="name">Marées</p><p class="desc">Horaires & coef</p></div></div>
+        <a class="tile" href="https://maree.info/59" target="_blank">
+          <div class="row">
+            <div class="icon">🌊</div>
+            <div>
+              <p class="name">Marées</p>
+              <p class="desc">Horaires & coef</p>
+            </div>
+          </div>
         </a>
 
-        <a class="tile" href="https://www.port-armor.com/" target="_blank" rel="noopener">
-          <div class="row"><div class="icon">⚓</div><div><p class="name">Port d’Armor</p><p class="desc">Infos & services</p></div></div>
+        <a class="tile" href="https://www.port-armor.com/" target="_blank">
+          <div class="row">
+            <div class="icon">⚓</div>
+            <div>
+              <p class="name">Port d’Armor</p>
+              <p class="desc">Infos & services</p>
+            </div>
+          </div>
         </a>
 
-        <a class="tile" href="https://maps.garmin.com/fr-FR/marine?maps=another-brand&overlay=false&key=gbtuzq7bxfzf" target="_blank" rel="noopener">
-          <div class="row"><div class="icon">🗺️</div><div><p class="name">Cartes</p><p class="desc">Garmin Marine</p></div></div>
+        <a class="tile" href="https://maps.garmin.com/fr-FR/marine?maps=another-brand&overlay=false&key=gbtuzq7bxfzf" target="_blank">
+          <div class="row">
+            <div class="icon">🗺️</div>
+            <div>
+              <p class="name">Cartes</p>
+              <p class="desc">Garmin Marine</p>
+            </div>
+          </div>
         </a>
+
       </div>
 
-      <div class="footer">Astuce : redimensionne la fenêtre → la grille s’adapte.</div>
+      <div class="footer">Astuce : redimensionne la fenêtre → design adaptatif.</div>
     </div>
   </div>
 
