@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Navimeteo</title>
+  <meta name="theme-color" content="#0b1220" />
+  <style>
+    :root{
+      --glass: rgba(255,255,255,.10);
+      --border: rgba(255,255,255,.18);
+      --text: #eef3ff;
+      --muted: rgba(238,243,255,.78);
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --shadow2: 0 10px 28px rgba(0,0,0,.28);
+      --radius: 22px;
+      --tile: 160px;
+      --gap: 16px;
+    }
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: url("navimeteo.jpeg") no-repeat center center fixed;
+      background-size: cover;
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position: fixed; inset:0;
+      background:
+        radial-gradient(1200px 700px at 10% 10%, rgba(0,0,0,.15), rgba(0,0,0,.55)),
+        radial-gradient(900px 500px at 90% 20%, rgba(0,0,0,.10), rgba(0,0,0,.50)),
+        rgba(0,0,0,.25);
+      z-index:-1;
+    }
+
+    .wrap{ max-width: 1020px; margin:0 auto; padding:22px; }
+
+    .header{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:14px; margin-bottom:16px;
+    }
+    h1{ margin:0; font-size:20px; font-weight:750; letter-spacing:.2px; }
+    .subtitle{ margin:6px 0 0; font-size:13px; color:var(--muted); }
+
+    .panel{
+      border-radius: var(--radius);
+      background: var(--glass);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 18px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(var(--tile), 1fr));
+      gap: var(--gap);
+    }
+
+    a.tile{
+      position:relative;
+      display:flex; flex-direction:column; justify-content:center;
+      gap:12px;
+      padding:18px 14px;
+      border-radius:22px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      color:inherit;
+      text-decoration:none;
+      box-shadow: 0 10px 26px rgba(0,0,0,.25);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+      overflow:hidden;
+      user-select:none;
+    }
+    a.tile::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background: radial-gradient(420px 240px at var(--mx, 50%) var(--my, 50%),
+        rgba(255,255,255,.22),
+        rgba(255,255,255,0) 58%);
+      opacity:0;
+      transition: opacity .18s ease;
+      pointer-events:none;
+    }
+    a.tile:hover{
+      transform: translateY(-3px) scale(1.01);
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.22);
+      box-shadow: 0 18px 44px rgba(0,0,0,.32);
+    }
+    a.tile:hover::before{ opacity:1; }
+
+    .row{ display:flex; align-items:center; gap:12px; }
+    .icon{
+      width:56px; height:56px;
+      border-radius:18px;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.16);
+      flex:0 0 auto;
+      font-size:26px;
+    }
+    .name{ margin:0; font-size:14px; font-weight:750; letter-spacing:.2px; }
+    .desc{ margin:0; font-size:12px; color:var(--muted); line-height:1.25; }
+
+    .footer{ margin-top:12px; font-size:12px; color: rgba(238,243,255,.70); }
+
+    @media (max-width: 520px){
+      :root{ --tile: 150px; }
+      .panel{ padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div>
+        <h1>Navimeteo</h1>
+        <p class="subtitle">Météo • Windy • Marées • Port • Cartes</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="grid">
+        <a class="tile" href="https://marine.meteoconsult.fr/meteo-marine/bulletin-detaille/port-311/previsions-meteo-saint-quay-port-d-armor-aujourdhui" target="_blank" rel="noopener">
+          <div class="row"><div class="icon">☁️</div><div><p class="name">Météo</p><p class="desc">Bulletin détaillé</p></div></div>
+        </a>
+
+        <a class="tile" href="https://www.windy.com/fr/-Mes-favoris/favs?48.647,-2.823,5" target="_blank" rel="noopener">
+          <div class="row"><div class="icon">🌬️</div><div><p class="name">Windy</p><p class="desc">Vent & prévisions</p></div></div>
+        </a>
+
+        <a class="tile" href="https://maree.info/59" target="_blank" rel="noopener">
+          <div class="row"><div class="icon">🌊</div><div><p class="name">Marées</p><p class="desc">Horaires & coef</p></div></div>
+        </a>
+
+        <a class="tile" href="https://www.port-armor.com/" target="_blank" rel="noopener">
+          <div class="row"><div class="icon">⚓</div><div><p class="name">Port d’Armor</p><p class="desc">Infos & services</p></div></div>
+        </a>
+
+        <a class="tile" href="https://maps.garmin.com/fr-FR/marine?maps=another-brand&overlay=false&key=gbtuzq7bxfzf" target="_blank" rel="noopener">
+          <div class="row"><div class="icon">🗺️</div><div><p class="name">Cartes</p><p class="desc">Garmin Marine</p></div></div>
+        </a>
+      </div>
+
+      <div class="footer">Astuce : redimensionne la fenêtre → la grille s’adapte.</div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('a.tile').forEach(tile => {
+      tile.addEventListener('mousemove', (e) => {
+        const r = tile.getBoundingClientRect();
+        const mx = ((e.clientX - r.left) / r.width) * 100;
+        const my = ((e.clientY - r.top) / r.height) * 100;
+        tile.style.setProperty('--mx', mx + '%');
+        tile.style.setProperty('--my', my + '%');
+      });
+    });
+  </script>
+</body>
+</html>
