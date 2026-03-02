@@ -30,7 +30,6 @@
       background-size: cover;
     }
 
-    /* overlay très léger */
     body::before{
       content:"";
       position: fixed;
@@ -75,7 +74,6 @@
       padding:28px 22px;
       border-radius: var(--radius);
 
-      /* Effet glass premium */
       background: var(--glass);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
@@ -87,7 +85,6 @@
                   background .30s ease,
                   box-shadow .30s ease;
       box-shadow: 0 20px 50px rgba(0,0,0,.15);
-      -webkit-tap-highlight-color: transparent;
     }
 
     a.tile:hover{
@@ -100,10 +97,16 @@
       display:flex;
       align-items:center;
       gap:18px;
-      min-width: 0;
+      width: 100%;      /* 🔥 important */
+      min-width: 0;     /* 🔥 important */
     }
 
-    /* Cadre de l'icône */
+    /* 🔥 le bloc texte doit pouvoir rétrécir en flex */
+    .row > div:last-child{
+      flex: 1 1 auto;   /* 🔥 important */
+      min-width: 0;     /* 🔥 important */
+    }
+
     .icon{
       width:72px;
       height:72px;
@@ -119,7 +122,6 @@
       overflow:hidden;
     }
 
-    /* Image (PNG/JPG) */
     .icon img{
       width: 46px;
       height: 46px;
@@ -135,6 +137,8 @@
     }
 
     .name{
+      display:block;
+      max-width:100%;
       font-size:17px;
       font-weight:800;
       margin:0;
@@ -145,11 +149,16 @@
     }
 
     .desc{
+      display:block;
+      max-width:100%;
       margin:0;
       font-size:13px;
       font-weight:600;
       color: rgba(11,31,58,.75);
       line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     @media (max-width: 600px){
