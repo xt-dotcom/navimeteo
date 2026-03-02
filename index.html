@@ -4,16 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Navimeteo</title>
-  <meta name="theme-color" content="#0b1220" />
+  <meta name="theme-color" content="#0b1f3a" />
 
   <style>
     :root{
-      --glass: rgba(255,255,255,.18);
-      --border: rgba(255,255,255,.28);
-      --text: #ffffff;
-      --muted: rgba(255,255,255,.85);
-      --shadow: 0 25px 60px rgba(0,0,0,.25);
-      --shadow-soft: 0 10px 30px rgba(0,0,0,.18);
+      /* Glass clair premium */
+      --glass: rgba(255,255,255,.22);
+      --border: rgba(0,25,60,.15);
+
+      /* Texte bleu marine */
+      --text: #0b1f3a;     /* bleu marine profond */
+      --muted: #244a75;    /* bleu secondaire */
+
+      --shadow: 0 25px 60px rgba(0,0,0,.18);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,.12);
+
       --radius: 26px;
       --tile: 180px;
       --gap: 18px;
@@ -31,17 +36,12 @@
       overflow-x:hidden;
     }
 
-    /* Overlay premium lumineux */
+    /* Overlay très léger (ne doit presque pas assombrir) */
     body::before{
       content:"";
       position: fixed;
       inset:0;
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
-      background: linear-gradient(
-        rgba(255,255,255,.06),
-        rgba(0,0,0,.15)
-      );
+      background: rgba(255,255,255,.03);
       z-index:-1;
     }
 
@@ -53,19 +53,22 @@
 
     .header{
       margin-bottom: 22px;
+      text-shadow: 0 1px 0 rgba(255,255,255,.25);
     }
 
     h1{
       margin:0;
       font-size: 24px;
       font-weight: 800;
-      letter-spacing: .3px;
+      letter-spacing: .5px;
+      color: #07182d; /* bleu nuit chic */
     }
 
     .subtitle{
       margin-top: 6px;
       font-size: 14px;
       color: var(--muted);
+      font-weight: 600;
     }
 
     .panel{
@@ -92,8 +95,11 @@
       gap:14px;
       padding:22px 18px;
       border-radius:22px;
-      background: rgba(255,255,255,.20);
-      border: 1px solid rgba(255,255,255,.35);
+
+      /* cartes plus claires */
+      background: rgba(255,255,255,.65);
+      border: 1px solid rgba(0,25,60,.14);
+
       text-decoration:none;
       color:inherit;
       box-shadow: var(--shadow-soft);
@@ -101,13 +107,14 @@
       overflow:hidden;
     }
 
+    /* halo blanc au survol */
     a.tile::before{
       content:"";
       position:absolute;
       inset:-2px;
       background: radial-gradient(
-        400px circle at var(--mx, 50%) var(--my, 50%),
-        rgba(255,255,255,.45),
+        420px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(255,255,255,.75),
         transparent 60%
       );
       opacity:0;
@@ -117,13 +124,11 @@
 
     a.tile:hover{
       transform: translateY(-6px) scale(1.03);
-      box-shadow: 0 30px 60px rgba(0,0,0,.30);
-      background: rgba(255,255,255,.28);
+      box-shadow: 0 30px 60px rgba(0,0,0,.18);
+      background: rgba(255,255,255,.78);
+      border-color: rgba(0,25,60,.18);
     }
-
-    a.tile:hover::before{
-      opacity:1;
-    }
+    a.tile:hover::before{ opacity:1; }
 
     .row{
       display:flex;
@@ -139,31 +144,39 @@
       align-items:center;
       justify-content:center;
       font-size:30px;
-      background: rgba(255,255,255,.35);
-      box-shadow: inset 0 0 15px rgba(255,255,255,.25);
+
+      /* teinte marine très légère */
+      background: rgba(11,31,58,.08);
+      border: 1px solid rgba(11,31,58,.10);
+      box-shadow: inset 0 0 18px rgba(255,255,255,.45);
     }
 
     .name{
       font-size:16px;
-      font-weight:700;
+      font-weight:800;
       margin:0;
+      color: #07182d;
+      letter-spacing: .2px;
     }
 
     .desc{
       margin:0;
       font-size:13px;
-      color: rgba(255,255,255,.85);
+      color: rgba(11,31,58,.75);
+      font-weight: 650;
     }
 
     .footer{
       margin-top:16px;
       font-size:12px;
-      color: rgba(255,255,255,.75);
+      color: rgba(11,31,58,.70);
+      font-weight: 600;
     }
 
     @media (max-width: 600px){
       :root{ --tile: 160px; }
       .panel{ padding:18px; }
+      .wrap{ padding: 20px; }
     }
   </style>
 </head>
@@ -178,7 +191,7 @@
     <div class="panel">
       <div class="grid">
 
-        <a class="tile" href="https://marine.meteoconsult.fr/meteo-marine/bulletin-detaille/port-311/previsions-meteo-saint-quay-port-d-armor-aujourdhui" target="_blank">
+        <a class="tile" href="https://marine.meteoconsult.fr/meteo-marine/bulletin-detaille/port-311/previsions-meteo-saint-quay-port-d-armor-aujourdhui" target="_blank" rel="noopener">
           <div class="row">
             <div class="icon">☁️</div>
             <div>
@@ -188,7 +201,7 @@
           </div>
         </a>
 
-        <a class="tile" href="https://www.windy.com/fr/-Mes-favoris/favs?48.647,-2.823,5" target="_blank">
+        <a class="tile" href="https://www.windy.com/fr/-Mes-favoris/favs?48.647,-2.823,5" target="_blank" rel="noopener">
           <div class="row">
             <div class="icon">🌬️</div>
             <div>
@@ -198,7 +211,7 @@
           </div>
         </a>
 
-        <a class="tile" href="https://maree.info/59" target="_blank">
+        <a class="tile" href="https://maree.info/59" target="_blank" rel="noopener">
           <div class="row">
             <div class="icon">🌊</div>
             <div>
@@ -208,7 +221,7 @@
           </div>
         </a>
 
-        <a class="tile" href="https://www.port-armor.com/" target="_blank">
+        <a class="tile" href="https://www.port-armor.com/" target="_blank" rel="noopener">
           <div class="row">
             <div class="icon">⚓</div>
             <div>
@@ -218,7 +231,7 @@
           </div>
         </a>
 
-        <a class="tile" href="https://maps.garmin.com/fr-FR/marine?maps=another-brand&overlay=false&key=gbtuzq7bxfzf" target="_blank">
+        <a class="tile" href="https://maps.garmin.com/fr-FR/marine?maps=another-brand&overlay=false&key=gbtuzq7bxfzf" target="_blank" rel="noopener">
           <div class="row">
             <div class="icon">🗺️</div>
             <div>
@@ -230,11 +243,12 @@
 
       </div>
 
-      <div class="footer">Astuce : redimensionne la fenêtre → design adaptatif.</div>
+      <div class="footer">Astuce : ajoute <strong>?v=4</strong> à l’URL si ton navigateur garde l’ancienne version.</div>
     </div>
   </div>
 
   <script>
+    // Halo dynamique au survol
     document.querySelectorAll('a.tile').forEach(tile => {
       tile.addEventListener('mousemove', (e) => {
         const r = tile.getBoundingClientRect();
