@@ -1,254 +1,303 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Navimeteo</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Navimeteo</title>
 
-  <style>
-    :root{
-      --text: #0b1f3a;
-      --muted: rgba(11,31,58,.72);
+<style>
+:root{
+  --text:#0b1f3a;
+  --muted:rgba(11,31,58,.72);
 
-      /* EXACTEMENT comme Bankinsurance (logos-rect-4) */
-      --tile-bg: rgba(255,255,255,.26);
-      --tile-bg-hover: rgba(255,255,255,.34);
-      --tile-border: rgba(0,25,60,.12);
+  --tile-bg:rgba(255,255,255,.26);
+  --tile-bg-hover:rgba(255,255,255,.34);
+  --tile-border:rgba(0,25,60,.12);
 
-      /* ✅ mêmes dimensions */
-      --tile-w: 160px;
-      --tile-h: 110px;
-      --radius: 0px;
+  /* Ratio officiel */
+  --tile-w:160px;
+  --tile-h:110px;
+  --gap:18px;
+  --radius:0px;
 
-      /* ✅ même espacement */
-      --gap: 18px;
+  --shadow-tile:0 10px 22px rgba(0,0,0,.14);
+  --shadow-tile-hover:0 16px 32px rgba(0,0,0,.18);
 
-      --shadow-tile: 0 10px 22px rgba(0,0,0,.14);
-      --shadow-tile-hover: 0 16px 32px rgba(0,0,0,.18);
-    }
+  --pill-bg:rgba(255,255,255,.38);
+  --pill-border:rgba(0,25,60,.15);
+  --pill-text:#07182d;
+}
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+*{box-sizing:border-box}
+html,body{height:100%}
 
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background: url("navimeteo.jpeg") no-repeat center center fixed;
-      background-size: cover;
-      overflow-x:hidden;
-    }
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:url("navimeteo.jpeg") no-repeat center center fixed;
+  background-size:cover;
+  overflow-x:hidden;
+}
 
-    body::before{
-      content:"";
-      position: fixed;
-      inset:0;
-      background:
-        radial-gradient(900px 500px at 20% 10%, rgba(255,255,255,.14), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.05));
-      z-index:-1;
-    }
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(900px 500px at 20% 10%, rgba(255,255,255,.14), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.05));
+  z-index:-1;
+}
 
-    .wrap{
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 38px 26px 44px;
-    }
+.wrap{
+  max-width:1180px;
+  margin:0 auto;
+  padding:38px 26px 44px;
+}
 
-    h1{
-      margin:0;
-      font-size: 28px;
-      font-weight: 900;
-      color:#07182d;
-    }
-    .subtitle{
-      margin-top: 6px;
-      font-size: 14px;
-      font-weight: 650;
-      color: var(--muted);
-    }
+h1{
+  margin:0;
+  font-size:28px;
+  font-weight:900;
+  color:#07182d;
+}
 
-    .section{ margin-top: 28px; }
-    .section h2{
-      margin: 0 0 12px;
-      font-size: 16px;
-      font-weight: 850;
-      color:#07182d;
-    }
+.subtitle{
+  margin-top:6px;
+  font-size:14px;
+  font-weight:650;
+  color:var(--muted);
+}
 
-    .grid{
-      display:flex;
-      flex-wrap:wrap;
-      gap: var(--gap);
-      align-items:flex-start;
-    }
+/* Dashboard */
+.dash{
+  margin-top:12px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
 
-    /* ✅ EXACTEMENT la même tuile */
-    .tile{
-      width: var(--tile-w);
-      height: var(--tile-h);
-      border-radius: var(--radius);
+.pill{
+  display:inline-flex;
+  align-items:center;
+  padding:8px 12px;
+  border-radius:999px;
+  background:var(--pill-bg);
+  border:1px solid var(--pill-border);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  font-size:13px;
+  font-weight:800;
+  color:var(--pill-text);
+  box-shadow:0 8px 18px rgba(0,0,0,.12);
+  white-space:nowrap;
+}
 
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 14px 12px;
+.section{margin-top:26px}
 
-      background: var(--tile-bg);
-      border: 1px solid var(--tile-border);
-      box-shadow: var(--shadow-tile);
+.section h2{
+  margin:0 0 12px;
+  font-size:16px;
+  font-weight:850;
+  color:#07182d;
+}
 
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+.grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--gap);
+}
 
-      text-decoration:none;
-      color: inherit;
+.tile{
+  width:var(--tile-w);
+  height:var(--tile-h);
+  border-radius:var(--radius);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px;
+  background:var(--tile-bg);
+  border:1px solid var(--tile-border);
+  box-shadow:var(--shadow-tile);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  text-decoration:none;
+  transition:.18s ease;
+  position:relative;
+}
 
-      position: relative;
-      transition: transform .18s cubic-bezier(.2,.8,.2,1),
-                  background .18s ease,
-                  box-shadow .18s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
+.tile:hover{
+  transform:translateY(-3px);
+  background:var(--tile-bg-hover);
+  box-shadow:var(--shadow-tile-hover);
+}
 
-    .tile:hover{
-      transform: translateY(-3px);
-      background: var(--tile-bg-hover);
-      box-shadow: var(--shadow-tile-hover);
-    }
-    .tile:active{ transform: translateY(-1px) scale(.99); }
+/* Logos centrés */
+.tile img{
+  max-width:100%;
+  max-height:70px;
+  object-fit:contain;
+  filter:drop-shadow(0 8px 14px rgba(0,0,0,.16));
+}
 
-    /* ✅ EXACTEMENT la même contrainte logo (peu importe forme/taille) */
-    .tile img{
-      max-width: 100%;
-      max-height: 86px;
-      object-fit: contain;
-      display:block;
-      filter: drop-shadow(0 8px 14px rgba(0,0,0,.16));
-    }
+/* Tooltip */
+.tile[data-tip]::after{
+  content: attr(data-tip);
+  position:absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(10,20,35,.82);
+  color: rgba(255,255,255,.96);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: .2px;
+  opacity: 0;
+  pointer-events:none;
+  transition: opacity .14s ease, transform .14s ease;
+}
+.tile[data-tip]::before{
+  content:"";
+  position:absolute;
+  left: 50%;
+  bottom: calc(100% + 4px);
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(10,20,35,.82);
+  opacity: 0;
+  pointer-events:none;
+  transition: opacity .14s ease, transform .14s ease;
+}
+.tile:hover::after,
+.tile:hover::before{
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
 
-    /* Tooltip custom */
-    .tile[data-tip]::after{
-      content: attr(data-tip);
-      position:absolute;
-      left: 50%;
-      bottom: calc(100% + 10px);
-      transform: translateX(-50%);
-      white-space: nowrap;
-      padding: 8px 10px;
-      border-radius: 10px;
-
-      background: rgba(10,20,35,.82);
-      color: rgba(255,255,255,.96);
-      font-size: 12px;
-      font-weight: 650;
-      letter-spacing: .2px;
-
-      opacity: 0;
-      pointer-events:none;
-      transition: opacity .14s ease, transform .14s ease;
-      z-index: 10;
-    }
-
-    .tile[data-tip]::before{
-      content:"";
-      position:absolute;
-      left: 50%;
-      bottom: calc(100% + 4px);
-      transform: translateX(-50%);
-      border: 6px solid transparent;
-      border-top-color: rgba(10,20,35,.82);
-
-      opacity: 0;
-      pointer-events:none;
-      transition: opacity .14s ease, transform .14s ease;
-      z-index: 10;
-    }
-
-    .tile:hover::after,
-    .tile:hover::before,
-    .tile:focus-visible::after,
-    .tile:focus-visible::before{
-      opacity: 1;
-      transform: translateX(-50%) translateY(-2px);
-    }
-
-    .tile:focus-visible{
-      outline: 3px solid rgba(36,74,117,.35);
-      outline-offset: 3px;
-    }
-
-    /* ✅ mêmes breakpoints que Bankinsurance */
-    @media (max-width: 720px){
-      :root{ --tile-w: 120px; --tile-h: 132px; --gap: 16px; }
-      .wrap{ padding: 28px 18px 36px; }
-      .tile img{ max-height: 82px; }
-    }
-    @media (max-width: 480px){
-      :root{ --tile-w: 100%; --tile-h: 96px; }
-      .tile{ width: 100%; }
-      .tile img{ max-height: 64px; }
-    }
-  </style>
+/* Responsive */
+@media(max-width:720px){
+  :root{--tile-w:150px;--tile-h:104px}
+}
+@media(max-width:480px){
+  :root{--tile-w:100%;--tile-h:96px}
+  .tile{width:100%}
+}
+</style>
 </head>
 
 <body>
-  <div class="wrap">
-    <header>
-      <h1>Navimeteo</h1>
-      <div class="subtitle">Météo • Windy • Marées • Port • Cartes</div>
-    </header>
+<div class="wrap">
+<header>
+  <h1>Navimeteo</h1>
+  <div class="subtitle">Météo • Windy • Marées • Port • Cartes</div>
 
-    <section class="section" aria-label="Prévisions">
-      <h2>Prévisions</h2>
-      <div class="grid">
-        <a class="tile" href="https://marine.meteoconsult.fr/meteo-marine/bulletin-detaille/port-311/previsions-meteo-saint-quay-port-d-armor-aujourdhui"
-           target="_blank" rel="noopener"
-           aria-label="Météo — Bulletin détaillé"
-           data-tip="Météo — Bulletin détaillé">
-          <img src="meteo.png" alt="Météo">
-        </a>
-
-        <a class="tile" href="https://www.windy.com/fr/-Mes-favoris/favs?48.647,-2.823,5"
-           target="_blank" rel="noopener"
-           aria-label="Windy — Vent & prévisions"
-           data-tip="Windy — Vent & prévisions">
-          <img src="windy.png" alt="Windy">
-        </a>
-      </div>
-    </section>
-
-    <section class="section" aria-label="Mer & marées">
-      <h2>Mer & marées</h2>
-      <div class="grid">
-        <a class="tile" href="https://maree.info/59"
-           target="_blank" rel="noopener"
-           aria-label="Marées — Horaires & coef"
-           data-tip="Marées — Horaires & coef">
-          <img src="marees.png" alt="Marées">
-        </a>
-      </div>
-    </section>
-
-    <section class="section" aria-label="Port & cartes">
-      <h2>Port & cartes</h2>
-      <div class="grid">
-        <a class="tile" href="https://www.port-armor.com/"
-           target="_blank" rel="noopener"
-           aria-label="Port d’Armor — Infos & services"
-           data-tip="Port d’Armor — Infos & services">
-          <img src="port.jpg" alt="Port d’Armor">
-        </a>
-
-        <a class="tile" href="https://maps.garmin.com/fr-FR/marine?maps=another-brand&overlay=false&key=gbtuzq7bxfzf"
-           target="_blank" rel="noopener"
-           aria-label="Cartes — Garmin Marine"
-           data-tip="Cartes — Garmin Marine">
-          <img src="cartes.png" alt="Cartes">
-        </a>
-      </div>
-    </section>
-
+  <div class="dash">
+    <div class="pill" id="time">🕒 --:--</div>
+    <div class="pill" id="date">📅 --</div>
+    <div class="pill" id="weather">⏳ Saint-Quay-Portrieux • …</div>
   </div>
+</header>
+
+<section class="section" aria-label="Prévisions">
+  <h2>Prévisions</h2>
+  <div class="grid">
+    <a class="tile" href="https://marine.meteoconsult.fr/meteo-marine/bulletin-detaille/port-311/previsions-meteo-saint-quay-port-d-armor-aujourdhui"
+       target="_blank" rel="noopener"
+       data-tip="Météo — Bulletin détaillé">
+      <img src="meteo.png" alt="Météo">
+    </a>
+
+    <a class="tile" href="https://www.windy.com/fr/-Mes-favoris/favs?48.647,-2.823,5"
+       target="_blank" rel="noopener"
+       data-tip="Windy — Vent & prévisions">
+      <img src="windy.png" alt="Windy">
+    </a>
+  </div>
+</section>
+
+<section class="section" aria-label="Mer et marées">
+  <h2>Mer & marées</h2>
+  <div class="grid">
+    <a class="tile" href="https://maree.info/59"
+       target="_blank" rel="noopener"
+       data-tip="Marées — Horaires & coef">
+      <img src="marees.png" alt="Marées">
+    </a>
+  </div>
+</section>
+
+<section class="section" aria-label="Port et cartes">
+  <h2>Port & cartes</h2>
+  <div class="grid">
+    <a class="tile" href="https://www.port-armor.com/"
+       target="_blank" rel="noopener"
+       data-tip="Port d’Armor — Infos & services">
+      <img src="port.jpg" alt="Port d’Armor">
+    </a>
+
+    <a class="tile" href="https://maps.garmin.com/fr-FR/marine?maps=another-brand&overlay=false&key=gbtuzq7bxfzf"
+       target="_blank" rel="noopener"
+       data-tip="Cartes — Garmin Marine">
+      <img src="cartes.png" alt="Cartes">
+    </a>
+  </div>
+</section>
+
+</div>
+
+<script>
+// Heure / Date
+const fmtTime = new Intl.DateTimeFormat('fr-FR',{hour:'2-digit',minute:'2-digit'});
+const fmtDate = new Intl.DateTimeFormat('fr-FR',{weekday:'long',day:'2-digit',month:'long'});
+
+function updateTime(){
+  const now=new Date();
+  document.getElementById("time").textContent="🕒 "+fmtTime.format(now);
+  document.getElementById("date").textContent="📅 "+fmtDate.format(now);
+}
+updateTime();
+setInterval(updateTime,15000);
+
+// Icône météo
+function iconFromCode(c){
+  if(c===0) return "☀️";
+  if(c<=3) return "🌤️";
+  if(c===45||c===48) return "🌫️";
+  if((c>=51&&c<=67) || (c>=80&&c<=82)) return "🌧️";
+  if(c>=71&&c<=77) return "🌨️";
+  if(c>=95) return "⛈️";
+  return "🌡️";
+}
+
+// Météo FIXE : Saint-Quay-Portrieux
+const CITY = "Saint-Quay-Portrieux";
+const LAT = 48.650;
+const LON = -2.823;
+
+async function loadWeather(){
+  try{
+    const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current_weather=true&windspeed_unit=kmh`, { cache: "no-store" });
+    const j = await r.json();
+    const cw = j.current_weather;
+    const icon = iconFromCode(cw.weathercode);
+    const t = Math.round(cw.temperature);
+    const w = Math.round(cw.windspeed);
+
+    document.getElementById("weather").textContent =
+      `${icon} ${CITY} • ${t}°C • Vent ${w} km/h`;
+  }catch(e){
+    document.getElementById("weather").textContent = `⚠️ ${CITY} • Météo indisponible`;
+  }
+}
+
+loadWeather();
+// refresh toutes les 30 minutes
+setInterval(loadWeather, 1000 * 60 * 30);
+</script>
+
 </body>
 </html>
