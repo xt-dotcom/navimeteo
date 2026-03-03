@@ -10,16 +10,17 @@
       --text: #0b1f3a;
       --muted: rgba(11,31,58,.72);
 
-      /* Glass tiles */
+      /* EXACTEMENT comme Bankinsurance (logos-rect-4) */
       --tile-bg: rgba(255,255,255,.26);
       --tile-bg-hover: rgba(255,255,255,.34);
       --tile-border: rgba(0,25,60,.12);
 
-      /* Launcher Glass Pro v1 — Rect Grid (quasi carré / vertical léger) */
+      /* ✅ mêmes dimensions */
       --tile-w: 130px;
       --tile-h: 140px;
       --radius: 0px;
 
+      /* ✅ même espacement */
       --gap: 18px;
 
       --shadow-tile: 0 10px 22px rgba(0,0,0,.14);
@@ -82,6 +83,7 @@
       align-items:flex-start;
     }
 
+    /* ✅ EXACTEMENT la même tuile */
     .tile{
       width: var(--tile-w);
       height: var(--tile-h);
@@ -116,6 +118,7 @@
     }
     .tile:active{ transform: translateY(-1px) scale(.99); }
 
+    /* ✅ EXACTEMENT la même contrainte logo (peu importe forme/taille) */
     .tile img{
       max-width: 100%;
       max-height: 86px;
@@ -175,6 +178,7 @@
       outline-offset: 3px;
     }
 
+    /* ✅ mêmes breakpoints que Bankinsurance */
     @media (max-width: 720px){
       :root{ --tile-w: 120px; --tile-h: 132px; --gap: 16px; }
       .wrap{ padding: 28px 18px 36px; }
